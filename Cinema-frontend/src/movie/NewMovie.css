@@ -58,3 +58,7 @@
 .movie-form-option {
     min-width: 500px;
 }
+
+.datepicker {
+    width: 100%;
+}

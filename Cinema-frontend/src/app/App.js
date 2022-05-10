@@ -10,6 +10,7 @@ import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants';
 
 import MovieList from '../movie/MovieList';
+import SeatList from '../seat/SeatList';
 import NewMovie from '../movie/NewMovie';
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
@@ -18,6 +19,11 @@ import AppHeader from '../common/AppHeader';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
 import PrivateRoute from '../common/PrivateRoute';
+import NewHall from '../hall/NewHall';
+import ViewHall from '../hall/ViewHall';
+import ViewOrder from '../order/ViewOrder';
+import UpdateMovie from '../movie/UpdateMovie';
+import UpdateHall from '../hall/UpdateHall';
 
 import { Layout, notification } from 'antd';
 const { Content } = Layout;
@@ -110,7 +116,13 @@ class App extends Component {
                   render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                 </Route>
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/movie/new" component={NewMovie} handleLogout={this.handleLogout}></PrivateRoute>
-                <Route component={NotFound}></Route>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/movie/update/:id" component={UpdateMovie} handleLogout={this.handleLogout}></PrivateRoute>    
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/hall/new" component={NewHall} handleLogout={this.handleLogout}></PrivateRoute>
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/hall/view" component={ViewHall} handleLogout={this.handleLogout}></PrivateRoute>  
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/hall/update/:id" component={UpdateHall} handleLogout={this.handleLogout}></PrivateRoute>  
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/seat/view" component={SeatList} handleLogout={this.handleLogout}></PrivateRoute>  
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/order/view" component={ViewOrder} handleLogout={this.handleLogout}></PrivateRoute>       
+                <Route component={NotFound}></Route>              
               </Switch>
             </div>
           </Content>

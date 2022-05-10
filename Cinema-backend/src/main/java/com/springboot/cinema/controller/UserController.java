@@ -3,14 +3,15 @@ package com.springboot.cinema.controller;
 import com.springboot.cinema.exception.ResourceNotFoundException;
 import com.springboot.cinema.model.User;
 import com.springboot.cinema.payload.*;
+import com.springboot.cinema.repository.HallRepository;
 import com.springboot.cinema.repository.MovieRepository;
 import com.springboot.cinema.repository.UserRepository;
 import com.springboot.cinema.security.UserPrincipal;
-//import com.springboot.cinema.service.PollService;
 import com.springboot.cinema.security.CurrentUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +25,8 @@ public class UserController {
     @Autowired
     private MovieRepository movieRepository;
 
-//    @Autowired
-//    private VoteRepository voteRepository;
-
-//    @Autowired
-//    private PollService pollService;
+    @Autowired
+    private HallRepository hallRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -51,30 +49,26 @@ public class UserController {
         return new UserIdentityAvailability(isAvailable);
     }
 
-    @GetMapping("/users/{username}")
-    public UserProfile getUserProfile(@PathVariable(value = "username") String username) {
+    @GetMapping("users/{username}")
+    public ResponseEntity<User> getProfileByUsername(@PathVariable String username) {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
-
-        UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(), user.getName(), user.getAddress(), user.getPhone());
-
-        return userProfile;
+                .orElseThrow(() -> new ResourceNotFoundException("User not exist with username :" + username));
+        return ResponseEntity.ok(user);
     }
-//
-//    @GetMapping("/users/{username}/polls")
-//    public PagedResponse<PollResponse> getPollsCreatedBy(@PathVariable(value = "username") String username,
-//                                                         @CurrentUser UserPrincipal currentUser,
-//                                                         @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-//                                                         @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-//        return pollService.getPollsCreatedBy(username, currentUser, page, size);
-//    }
-//
-//    @GetMapping("/users/{username}/votes")
-//    public PagedResponse<PollResponse> getPollsVotedBy(@PathVariable(value = "username") String username,
-//                                                       @CurrentUser UserPrincipal currentUser,
-//                                                       @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-//                                                       @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-//        return pollService.getPollsVotedBy(username, currentUser, page, size);
-//    }
+
+    // update user rest api
+
+    @PutMapping("users/{username}")
+    public ResponseEntity<User> updateProfile(@PathVariable String username, @RequestBody User profileDetails){
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + username));
+
+        user.setName(profileDetails.getName());
+        user.setAddress(profileDetails.getAddress());
+        user.setPhone(profileDetails.getPhone());
+
+        User updatedProfile = userRepository.save(user);
+        return ResponseEntity.ok(updatedProfile);
+    }
 
 }

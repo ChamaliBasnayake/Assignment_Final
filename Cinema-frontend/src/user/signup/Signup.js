@@ -89,7 +89,7 @@ class Signup extends Component {
             this.state.email.validateStatus === 'success' &&
             this.state.password.validateStatus === 'success'&&
             this.state.address.validateStatus === 'success'&&
-            this.state.phone.validateStatus
+            this.state.phone.validateStatus === 'success'
         );
     }
 

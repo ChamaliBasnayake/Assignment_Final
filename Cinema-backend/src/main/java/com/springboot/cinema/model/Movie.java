@@ -1,16 +1,8 @@
 package com.springboot.cinema.model;
 
-import com.springboot.cinema.model.audit.UserDateAudit;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "movies")
@@ -23,26 +15,46 @@ public class Movie {
     @Size(max = 140)
     private String name;
 
+    @NotBlank
+    @Size(max = 50)
+    private String category;
+
+    @NotBlank
+    @Size(max = 50)
+    private String language;
+
+    @NotBlank
+    @Size(max = 150)
+    private String description;
+
+    @NotBlank
+    private String startDate;
+
+    @NotBlank
+    private String endDate;
+
+    @NotBlank
+    private String startTime;
+
+    @NotBlank
+    private String endTime;
+
+
     public Movie() {
 
     }
 
-    public Movie(String name) {
+    public Movie(String name, String category, String language, String description, String startDate, String endDate, String startTime, String endTime) {
+
         this.name = name;
+        this.category = category;
+        this.language = language;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
-
-//    @OneToMany(
-//            mappedBy = "polls",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.EAGER,
-//            orphanRemoval = true
-//    )
-//    @Size(min = 2, max = 6)
-//    @Fetch(FetchMode.SELECT)
-//    @BatchSize(size = 30)
-//    private List<Choice> choices = new ArrayList<>();
-
-//
 
     public Long getId() {
         return id;
@@ -60,29 +72,59 @@ public class Movie {
         this.name = name;
     }
 
-//    public List<Choice> getChoices() {
-//        return choices;
-//    }
-//
-//    public void setChoices(List<Choice> choices) {
-//        this.choices = choices;
-//    }
+    public String getCategory() {
+        return category;
+    }
 
-//    public Instant getExpirationDateTime() {
-//        return expirationDateTime;
-//    }
-//
-//    public void setExpirationDateTime(Instant expirationDateTime) {
-//        this.expirationDateTime = expirationDateTime;
-//    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-//    public void addChoice(Choice choice) {
-//        choices.add(choice);
-//        choice.setPoll(this);
-//    }
-//
-//    public void removeChoice(Choice choice) {
-//        choices.remove(choice);
-//        choice.setPoll(null);
-//    }
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
 }

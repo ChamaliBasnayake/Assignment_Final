@@ -6,6 +6,8 @@ import {
 import './AppHeader.css';
 import cinemaIcon from '../cinema.svg';
 import hallIcon from '../hall.svg';
+import seatIcon from '../booking.svg';
+import orderIcon from '../order.svg';
 
 import { Layout, Menu, Dropdown, Icon } from 'antd';
 const Header = Layout.Header;
@@ -36,11 +38,21 @@ class AppHeader extends Component {
               <img src={cinemaIcon} alt="cinema" className="cinema-icon" />
             </Link>
           </Menu.Item>,
-            <Menu.Item key="/hall/new">
-            <Link to="/hall/new">
+            <Menu.Item key="/hall/view">
+            <Link to="/hall/view">
               <img src={hallIcon} alt="hall" className="hall-icon" />
             </Link>
           </Menu.Item>,
+           <Menu.Item key="/seat/view">
+           <Link to="/seat/view">
+             <img src={seatIcon} alt="seat" className="seat-icon" />
+           </Link>
+         </Menu.Item>,
+           <Menu.Item key="/order/view">
+           <Link to="/order/view">
+             <img src={orderIcon} alt="order" className="order-icon" />
+           </Link>
+         </Menu.Item>,
           <Menu.Item key="/profile" className="profile-menu">
                 <ProfileDropdownMenu 
                   currentUser={this.props.currentUser} 
@@ -73,7 +85,7 @@ class AppHeader extends Component {
               </Menu>
             </div>
           </Header>
-        );
+        ); 
     }
 }
 
