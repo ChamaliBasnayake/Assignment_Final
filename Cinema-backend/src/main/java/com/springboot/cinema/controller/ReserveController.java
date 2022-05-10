@@ -1,5 +1,7 @@
 package com.springboot.cinema.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.cinema.model.Reserve;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
@@ -30,28 +32,38 @@ public class ReserveController {
 
     @GetMapping
     @KafkaListener(topics = "transaction-1")
-    public void listener(@Payload Reserve reserve, ConsumerRecord<String, Reserve> cr) {
+    public String listener(@Payload Reserve reserve, ConsumerRecord<String, Reserve> cr) throws JsonProcessingException {
+
         logger.info("Topic [transaction-1] Received message from {} with {} PLN ", reserve.getId(),reserve.getCustomerName(), reserve.getPhone(),reserve.getMovieName(),reserve.getDate(),reserve.getOdcSeats(),reserve.getBalconySeats(),reserve.getSuperBalconySeats(),reserve.getPayment());
         logger.info(cr.toString());
 
-//        Map<String,Object> result = new ObjectMapper().readValue(, HashMap.class);
-//        return result;
 
+//        ObjectMapper mapper = new ObjectMapper();
+//        Object json = mapper.readValue(
+//                mapper.writeValueAsString(employee), Object.class);
+//
+//        System.out.println(mapper.writerWithDefaultPrettyPrinter()
+//                .writeValueAsString(json));
+
+
+//        Reserve u = new Reserve();
+//        u.setId(reserve.getId());
+//        u.setCustomerName(reserve.getCustomerName());
+//        u.setPhone(reserve.getPhone());
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//
+//        try {
+//            return mapper.writeValueAsString(u);
+//        }
+//        catch (JsonProcessingException e) {
+//            // catch various errors
+//            e.printStackTrace();
+//        }
+//        return null;
+        return null;
     }
 
 
-//
-//    @GetMapping()
-//    public ResponseEntity<Reserve> sendMessage(@RequestBody Reserve reserve) {
-//        producer.orderStatusChangeTopic(reserve);
-//        dataResponse = new DataResponse("msg sent successfully",true);
-//        return new ResponseEntity<>(dataResponse,
-//                HttpStatus.OK);
-//    }
-//
-//    public String receiveMessage(@RequestBody Reserve reserve) {
-//        this.kafkaTemplate.send("transaction-1", new Reserve(reserve.getId(),reserve.getCustomerName(), reserve.getPhone(),reserve.getMovieName(),reserve.getDate(),reserve.getOdcSeats(),reserve.getBalconySeats(),reserve.getSuperBalconySeats(),reserve.getPayment()));
-//
-//        return "Sent";
-//    }
+
 }
