@@ -1,9 +1,7 @@
 package com.springboot.cinema.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.cinema.exception.ResourceNotFoundException;
 import com.springboot.cinema.model.Book;
-import com.springboot.cinema.model.Movie;
 import com.springboot.cinema.repository.BookRepository;
 import com.springboot.cinema.repository.UserRepository;
 import org.slf4j.Logger;
@@ -12,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController

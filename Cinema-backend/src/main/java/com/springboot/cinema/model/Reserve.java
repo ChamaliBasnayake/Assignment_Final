@@ -13,7 +13,7 @@ public class Reserve {
             private String odcSeats;
 
             private String balconySeats;
-            private String superBalconySeats;
+            private String superbalconySeats;
             private String payment;
 
             public Reserve(
@@ -24,7 +24,7 @@ public class Reserve {
                     @JsonProperty String date,
                     @JsonProperty String odcSeats,
                     @JsonProperty String balconySeats,
-                    @JsonProperty String superBalconySeats,
+                    @JsonProperty String superbalconySeats,
                     @JsonProperty String payment)
             {
                 this.id = id;
@@ -34,7 +34,7 @@ public class Reserve {
                 this.date = date;
                 this.odcSeats = odcSeats;
                 this.balconySeats = balconySeats;
-                this.superBalconySeats = superBalconySeats;
+                this.superbalconySeats = superbalconySeats;
                 this.payment = payment;
             }
 
@@ -98,17 +98,17 @@ public class Reserve {
                 this.balconySeats = balconySeats;
             }
 
-            public String getSuperBalconySeats() {
-                return superBalconySeats;
+            public String getSuperbalconySeats() {
+                return superbalconySeats;
             }
 
-            public void setSuperBalconySeats(String superBalconySeats) {
-                this.superBalconySeats = superBalconySeats;
+            public void setSuperbalconySeats(String superbalconySeats) {
+                this.superbalconySeats = superbalconySeats;
             }
 
             public String getPayment() {
-                return payment;
-            }
+                        return payment;
+                    }
 
             public void setPayment(String payment) {
                 this.payment = payment;

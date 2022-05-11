@@ -121,7 +121,7 @@ class App extends Component {
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/hall/view" component={ViewHall} handleLogout={this.handleLogout}></PrivateRoute>  
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/hall/update/:id" component={UpdateHall} handleLogout={this.handleLogout}></PrivateRoute>  
                 <PrivateRoute authenticated={this.state.isAuthenticated} path="/seat/view" component={SeatList} handleLogout={this.handleLogout}></PrivateRoute>  
-                <PrivateRoute authenticated={this.state.isAuthenticated} path="/order/view" component={ViewOrder} handleLogout={this.handleLogout}></PrivateRoute>       
+                <PrivateRoute authenticated={this.state.isAuthenticated} path="/order/view/" component={ViewOrder} handleLogout={this.handleLogout}></PrivateRoute>       
                 <Route component={NotFound}></Route>              
               </Switch>
             </div>

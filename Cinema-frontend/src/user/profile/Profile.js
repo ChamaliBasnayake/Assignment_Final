@@ -25,7 +25,6 @@ class Profile extends Component {
 
     componentDidMount(){
         ProfileService.getProfileByUsername(this.state.username).then( (res) =>{
-            console.log("htj");
             let profile = res.data;
             this.setState({
                 name: profile.name,

@@ -10,12 +10,13 @@ class ViewOrder extends Component {
         this.state = {
             customerName: '',
             phone: '',
-            movieName: '',
-            date: '',
+            movieName: this.props.match.params.movieName,
+            date: this.props.match.params.date,
             odcSeats: '',
             balconySeats: '',
-            superBalconySeats: '',
-            payment: ''
+            superbalconySeats: '',
+            payment: '',
+            showHide: false,
         }
         this.approveOrder = this.approveOrder.bind(this);
     }
@@ -27,14 +28,15 @@ class ViewOrder extends Component {
             date: this.state.date, 
             odcSeats: this.state.odcSeats,
             balconySeats: this.state.balconySeats,
-            superBalconySeats: this.state.superBalconySeats
+            superbalconySeats: this.state.superbalconySeats
         };
         console.log('order => ' + JSON.stringify(order));
-        console.log('id => ' + JSON.stringify(this.state.id));
 
-        axios.put(`http://localhost:8080/api/booking/Home`,order)
+        axios.put(`http://localhost:8080/api/booking/`+this.state.movieName+'/'+this.state.date,order)
         .then(res => {
             this.props.history.push('/seat/view');
+            
+
         })
     }
 
@@ -49,7 +51,7 @@ class ViewOrder extends Component {
                 date: data.date,
                 odcSeats: data.odcSeats,
                 balconySeats: data.balconySeats,
-                superBalconySeats: data.superBalconySeats,
+                superbalconySeats: data.superbalconySeats,
                 payment: data.payment
           });
         })
@@ -84,7 +86,7 @@ class ViewOrder extends Component {
                                     <td>{this.state.date}</td>
                                     <td>{this.state.odcSeats}</td>
                                     <td>{this.state.balconySeats}</td>
-                                    <td>{this.state.superBalconySeats}</td>
+                                    <td>{this.state.superbalconySeats}</td>
                                     <td>{this.state.payment}</td>
                                     <td>
                                     <Button type="primary" onClick={this.approveOrder}>Approve</Button>     

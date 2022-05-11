@@ -26,5 +26,6 @@
     "babel-plugin-import": "^1.6.5",
     "react-app-rewire-less": "^2.1.0",
     "react-app-rewired": "^1.4.1"
-  }
+  },
+  "dev": "docker-compose -f docker-compose.dev.yml up"
 }
